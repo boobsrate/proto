@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package auth.v1;
+
+import "auth/v1/auth.proto";
+
+option go_package = "auth/v1;authv1";
+
+service AuthService {
+  rpc TelegramLogin(TelegramLoginRequest) returns (TelegramLoginResponse) {}
+  rpc GetUserBySession(GetUserBySessionRequest) returns (GetUserBySessionResponse) {}
+  rpc DeleteSession(DeleteSessionRequest) returns (DeleteSessionResponse) {}
+}
+
+message TelegramLoginRequest {
+  TelegramPayload data = 1;
+}
+
+message TelegramLoginResponse {
+  string session_id = 1;
+}
+
+message GetUserBySessionRequest {
+  string session_id = 1;
+}
+
+message GetUserBySessionResponse {
+  User user = 1;
+}
+
+message DeleteSessionRequest {
+  string session_id = 1;
+}
+
+message DeleteSessionResponse {
+
+}
