@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package tits.v1;
+
+import "google/type/datetime.proto";
+
+
+option go_package = "tits/v1;titsv1";
+
+// Tits describes tits entity message.
+message Tits {
+  // ID of the tits
+  string id = 1;
+
+  // Current rating.
+  int64 rating = 2;
+
+  // Creation timestamp.
+  google.type.DateTime created_at = 3;
+
+  // URL of webp preview image.
+  string url = 4;
+
+  // URL of full-size original image.
+  string full_url = 5;
+
+  // Flag, indicates, that this tits in the abyss.
+  bool abyss = 6;
+}

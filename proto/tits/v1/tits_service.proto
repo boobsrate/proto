@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package tits.v1;
+
+import "tits/v1/tits.proto";
+
+option go_package = "tits/v1;titsv1";
+
+// RPC service for tits.
+service TitsService {
+  // Returns specified count of tits with ordering.
+  rpc GetTits(GetTitsRequest) returns (GetTitsResponse) {}
+  // Rate or report tits.
+  rpc RateTits(RateTitsRequest) returns (RateTitsResponse) {}
+}
+
+
+// Enum for GetTitsRequest with ordering types.
+message TitsFilterEnum {
+  // Enum with ordering types
+  enum Enum {
+    // Random ordering.
+    RANDOM = 0;
+
+    // Order by rating desc.
+    TOP = 1;
+  }
+}
+
+// Filter for get TitsRequest
+message GetTitsFilter {
+  // Count of tits to receive.
+  int32 amount = 1;
+
+  // Tits ordering.
+  TitsFilterEnum.Enum ordering = 3;
+}
+
+// GetTitsRequest
+message GetTitsRequest {
+  GetTitsFilter filter = 1;
+}
+
+// GetTitsResponse
+message GetTitsResponse {
+  // Tits
+  repeated Tits tits = 1;
+}
+
+
+// Enum for RateTitsRequest with vote types.
+message RateTypeEnum {
+  enum Enum {
+    VOTE = 0;
+
+    REPORT = 1;
+  }
+}
+
+message RateTitsRequest {
+  string tits_id = 1;
+  RateTypeEnum.Enum rate_type = 2;
+}
+
+message RateTitsResponse {
+  // No body
+}
